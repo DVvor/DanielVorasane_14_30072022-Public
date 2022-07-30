@@ -5,18 +5,24 @@
   background-color: black;
 }
 
-.modal {
+.create-employee-title-bl {
   display: flex;
-  flex-direction: column;
-  background-color: black;
-  padding: 20px;
-  padding-right: 20px;
-  color: white;
-  font-weight: 300;
-  width: 33%;
   justify-content: center;
-  box-sizing: border-box;
-  
+  align-items: center;
+}
+
+.create-employee-title {
+  margin: 0;
+  margin-bottom: 5px;
+  letter-spacing: 0.2rem;
+  font-weight: 100;
+}
+
+.container-h2 {
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  border-top: 1px solid white;
 }
 
 .isopen {
@@ -36,138 +42,16 @@
   }
 }
 
-
-.create-employee-form {
+.modal {
   display: flex;
   flex-direction: column;
-  color: white;
-  width: 100%;
-}
-
-.create-employee-title-bl {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-close-form{
-  position: absolute;
-  left: 16px;
-  font-size: 40px;
-  cursor: pointer;
-  transition: color 500ms ease;
-}
-
-.btn-close-form:hover {
-  color:  rgb(147, 173, 24);
-}
-
-.create-employee-title {
-  margin: 0;
-  margin-bottom: 5px;
-  letter-spacing: 0.2rem;
-  font-weight: 100;
-
-
-}
-
-.container-h2 {
-  display: flex;
-  justify-content: center;
-  font-weight: 700;
-  border-top: 1px solid white;
-
-}
-
-label {
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  color: white;
-
-}
-
-input {
-  width: 200px;
-  border-radius: 5px;
-  border: 1px solid black;
-  font-size: large;
-  padding: 5px;
-}
-
-.address {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid white;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  margin-right: 20px;
-  width: 100%;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-bottom:20px;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.title-adress {
-  margin: 0;
   background-color: black;
-  width: max-content;
-  position: absolute;
-  top: -10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: large;
-
-}
-
-.department-label {
-  margin-left: 0px
-}
-.department-select {
-  width: 213px;
-  margin-left: 0px;
-  font-size: large;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid black;
-}
-
-.department-select:focus {
-  outline:0;
-}
-
-
-.button-bl {
-  margin-top: 20px;
-  width: 100%;
-  display: flex;
+  padding: 20px;
+  padding-right: 20px;
+  color: white;
+  font-weight: 300;
+  width: 33%;
   justify-content: center;
-}
-
-.button-save {
-  width: 80%;
-  margin: 10px;
-  background-color: white;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 5px;
-  cursor: pointer;
-  /* box-shadow: 2px 1px 5px 1px grey; */
-  border: 1px solid black;
-  transition: background-color 500ms ease-out ;	
-}
-
-.button-save:hover {
-    letter-spacing: 0.1rem;
-    background-color: rgb(147, 173, 24); /* Green light */
-    font-weight: 700;
-    color: white;
+  box-sizing: border-box;
+  
 }
