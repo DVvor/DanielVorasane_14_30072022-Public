@@ -1,0 +1,15 @@
+.react-date-picker {
+  width: 212px;
+  height: 33px;
+  border-radius: 5px;
+  font-size: large;
+  background-color: white;
+  color: black;
+}
+.react-date-picker__wrapper {
+  border-radius: 5px;
+}
+
+.react-date-picker__button svg {
+  display: none;
+}
