@@ -1,0 +1,31 @@
+.header-ag-grid {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: rgb(24,29,31);
+  color: white;
+}
+
+.page-size {
+  margin-left: 10px;
+  display: flex;
+  gap: 5px;
+}
+.searchbar{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: rgb(24,29,31);
+}
+
+.label-filter {
+  color: white;
+  text-transform:none;
+}
+
+.searchbar-input {
+  margin: 10px;
+  width: 200px;
+}
