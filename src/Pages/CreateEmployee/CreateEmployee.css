@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: black;
+  background-color: rgb(24,29,31);
   padding-bottom: 8%;
 }
 
@@ -46,7 +46,7 @@
 .modal {
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: rgb(24,29,31);
   padding: 20px;
   padding-right: 20px;
   color: white;

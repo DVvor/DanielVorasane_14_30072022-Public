@@ -1,3 +1,11 @@
+.grid-page {
+  height: 74vh;
+}
+
+.ag-theme-alpine-dark {
+  height:100%
+}
+
 .header-ag-grid {
   width: 100%;
   display: flex;

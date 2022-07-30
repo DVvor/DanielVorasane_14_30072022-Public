@@ -19,12 +19,13 @@
   font-family: 'baskerville';
   font-weight: 500;
   font-size:70px;
+  color:rgb(24,29,31);
 }
 
 .btn-create {
   /* background-color: rgb(147, 173, 24); Green light */
   background-color: white;
-  color: black;
+  color: rgb(24,29,31);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -34,12 +35,12 @@
   border-radius: 5px;
   cursor: pointer;
   /* box-shadow: 2px 1px 5px 1px grey; */
-  border: 1px solid black;
+  border: 1px solid rgb(24,29,31);
   transition: all 200ms ;	
 }
 
 .btn-create:hover {
-  background-color: black;
+  background-color: rgb(24,29,31);
   color: white;
   /* letter-spacing: 0.1rem; */
 

@@ -82,10 +82,11 @@ function Home() {
 
   const defaultColDef = useMemo(() => {
     return {
-      minWidth: 120,
+      minWidth: 150,
       sortable: true,
       resizable: true,
-      unSortIcon: true
+      unSortIcon: true,
+      flex: 1,
     };
   }, []);
 
@@ -144,44 +145,45 @@ function Home() {
 
   ];
 
+
   return (
-    <>
-    <div className='header-ag-grid'>
-        <div className="page-size">
-          Show:
-          <select onChange={onPageSizeChanged} id="page-size-select">
-            <option value="10" defaultValue={true}>
-              10
-            </option>
-            <option value="100">100</option>
-            <option value="500">500</option>
-            <option value="1000">1000</option>
-          </select>
+    <div className='grid-page'>
+      <div className='header-ag-grid'>
+          <div className="page-size">
+            Show:
+            <select onChange={onPageSizeChanged} id="page-size-select">
+              <option value="10" defaultValue={true}>
+                10
+              </option>
+              <option value="100">100</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+            </select>
+          </div>
+        <div className='searchbar'>
+          <label className='label-filter'>Search:</label>
+          <input className='searchbar-input'
+                  type="text"
+                  id="filter-text-box"
+                  placeholder="Filter..."
+                  onInput={onFilterTextBoxChanged}
+                />
         </div>
-      <div className='searchbar'>
-        <label className='label-filter'>Search:</label>
-        <input className='searchbar-input'
-                type="text"
-                id="filter-text-box"
-                placeholder="Filter..."
-                onInput={onFilterTextBoxChanged}
-              />
+      </div>
+      <div className="ag-theme-alpine-dark" style={{width: '100%', margin:0}}>
+            <AgGridReact
+                rowData={rowData}
+                columnDefs={columnDefs}
+                onFirstDataRendered={autoSizeColumns}
+                onGridReady={onGridReady}
+                pagination={true}
+                defaultColDef={defaultColDef}
+                ref={gridRef}
+                paginationPageSize={10}
+                >
+            </AgGridReact>
       </div>
     </div>
-    <div className="ag-theme-alpine-dark" style={{height: 800, width: '100%', margin:0}}>
-           <AgGridReact
-              rowData={rowData}
-              columnDefs={columnDefs}
-              onFirstDataRendered={autoSizeColumns}
-              onGridReady={onGridReady}
-              defaultColDef={defaultColDef}
-              ref={gridRef}
-              pagination={true}
-              paginationPageSize={10}
-              >
-           </AgGridReact>
-       </div>
-    </>
   )
 }
 
