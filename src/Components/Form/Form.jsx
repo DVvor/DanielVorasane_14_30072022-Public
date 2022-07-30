@@ -1,11 +1,12 @@
 import './Form.css'
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
-import DatePicker from "react-date-picker";
-import { useNavigate } from "react-router-dom"
-// import { faSignOut } from '@fortawesome/free-solid-svg-icons'
+import ListDropdown from '../Dropdown/Dropdown';
+import { UsaStates } from 'usa-states';
+
+// import { useNavigate } from "react-router-dom"
+
+// import DatePicker from "react-date-picker";
 
 /**
  * Create a layout with principal component
@@ -13,7 +14,6 @@ import { useNavigate } from "react-router-dom"
 */
 
 function Form() {
-  const navigate = useNavigate() // permet d'utiliser une fonction de redirection - naviguer entre les pages
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -24,6 +24,17 @@ function Form() {
   const [stateOfcity, setStateOfcity] = useState();
   const [zipCode, setZipCode] = useState();
   const [department, setDepartment] = useState('');
+  
+  let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
+  const [error, setError] = useState(false);
+
+  const optionsDepartment = [
+    'Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'
+  ];
+
+  const usStates = new UsaStates();
+  const optionsUsStates = usStates.states.map((state) => state.name);
+
 
   function handlesubmit(event) {
     event.preventDefault()
@@ -36,11 +47,24 @@ function Form() {
     console.log(`stateOfcity: ${stateOfcity}`)
     console.log(`zipCode: ${zipCode}`)
     console.log(`department: ${department}`)
-
-  }
-
-  function closeForm() {
-    navigate(`/home`)  // Lien url home
+    
+    if(!validInput.test(firstName) || 
+    !validInput.test(lastName)|| 
+    firstName.length === 0 || 
+    lastName.length === 0 ||
+    // dateOfBirth.length === 0 ||
+    // startDate.length === 0 ||
+    street.length === 0 ||
+    city.length === 0 ||
+    stateOfcity.length === 0 ||
+    zipCode.length === 0 ||
+    department.length === 0) {
+      setError(true)
+      alert('error ou incomplet')
+      } else {
+        alert('pas derreur')
+        setError(false)
+      }
   }
 
   return (
@@ -53,7 +77,7 @@ function Form() {
 
       <label name="date-of-birth">Date of Birth</label>
       {/* <input id="date-of-birth" type="text" onChange={(event) => setDateOfBirth(event.target.value)}/> */}
-      <DatePickerComponent />
+      <DatePickerComponent onChange={(event) => setDateOfBirth(event.target.value)} />
 
       <label name="start-date">Start Date</label>
       {/* <input id="start-date" type="text" onChange={(event) => setStartDate(event.target.value)}></input> */}
@@ -70,20 +94,15 @@ function Form() {
 
         <label name="state">State</label>
         {/* <input name="state" id="state" placeholder='à faire menu déroulant' onChange={(event) => setStateOfcity(event.target.value)}></input> */}
-        {/* <SelectAState /> */}
+        <ListDropdown options={optionsUsStates}/>
+
 
         <label name="zip-code">Zip Code</label>
         <input id="zip-code" type="number" onChange={(event) => setZipCode(event.target.value)}></input>
       </div>
 
       <label name="department" className='department-label'>Department</label>
-      <select name="department" className="department-select" value={department} onChange={(event) => setDepartment(event.target.value)}>
-          <option value="Sales">Sales</option>
-          <option value="Marketing">Marketing</option>
-          <option value="Engineering">Engineering</option>
-          <option value="Human Resources">Human Resources</option>
-          <option value="Legal">Legal</option>
-      </select>
+      <ListDropdown options={optionsDepartment}/>
 
       <div className='button-bl'>
         <button className='button-save' onClick={handlesubmit} >Save</button>

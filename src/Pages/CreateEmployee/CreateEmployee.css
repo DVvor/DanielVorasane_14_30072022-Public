@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   background-color: black;
+  padding-bottom: 8%;
 }
 
 .create-employee-title-bl {

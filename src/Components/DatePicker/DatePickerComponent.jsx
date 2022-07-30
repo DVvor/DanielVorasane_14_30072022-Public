@@ -6,11 +6,11 @@ import DatePicker from 'react-date-picker';
 
 function DatePickerComponent() {
   const [value, onChange] = useState(new Date());
-
+  console.log(value)
   return (
     <div className='date-picker'>
       <DatePicker 
-      onChange={onChange} 
+      onChange={onChange}
       value={value} 
       clearIcon={null}
       calendarIcon={null}
