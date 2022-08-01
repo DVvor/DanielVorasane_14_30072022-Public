@@ -1,9 +1,9 @@
 import './CreateEmployee.css'
-import { useState } from 'react';
+// import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
-import DatePicker from "react-date-picker";
+// import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
+// import DatePicker from "react-date-picker";
 import { useNavigate } from "react-router-dom"
 import Form from '../../Components/Form/Form';
 
@@ -18,29 +18,29 @@ function CreateEmployee() {
   // const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate() // permet d'utiliser une fonction de redirection - naviguer entre les pages
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [dateOfBirth, setDateOfBirth] = useState();
-  const [startDate, setStartDate] = useState();
-  const [street, setStreet] = useState();
-  const [city, setCity] = useState();
-  const [stateOfcity, setStateOfcity] = useState();
-  const [zipCode, setZipCode] = useState();
-  const [department, setDepartment] = useState('');
+  // const [firstName, setFirstName] = useState();
+  // const [lastName, setLastName] = useState();
+  // const [dateOfBirth, setDateOfBirth] = useState();
+  // const [startDate, setStartDate] = useState();
+  // const [street, setStreet] = useState();
+  // const [city, setCity] = useState();
+  // const [stateOfcity, setStateOfcity] = useState();
+  // const [zipCode, setZipCode] = useState();
+  // const [department, setDepartment] = useState('');
 
-  function handlesubmit(event) {
-    event.preventDefault()
-    console.log(`firstName: ${firstName}`)
-    console.log(`lastName: ${lastName}`)
-    console.log(`dateOfBirth: ${dateOfBirth}`)
-    console.log(`startDate: ${startDate}`)
-    console.log(`street: ${street}`)
-    console.log(`city: ${city}`)
-    console.log(`stateOfcity: ${stateOfcity}`)
-    console.log(`zipCode: ${zipCode}`)
-    console.log(`department: ${department}`)
+  // function handlesubmit(event) {
+  //   event.preventDefault()
+  //   console.log(`firstName: ${firstName}`)
+  //   console.log(`lastName: ${lastName}`)
+  //   console.log(`dateOfBirth: ${dateOfBirth}`)
+  //   console.log(`startDate: ${startDate}`)
+  //   console.log(`street: ${street}`)
+  //   console.log(`city: ${city}`)
+  //   console.log(`stateOfcity: ${stateOfcity}`)
+  //   console.log(`zipCode: ${zipCode}`)
+  //   console.log(`department: ${department}`)
 
-  }
+  // }
 
   function closeForm() {
     navigate(`/home`)  // Lien url home
