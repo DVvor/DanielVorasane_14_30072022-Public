@@ -2,22 +2,28 @@ import './DatePickerComponent.css'
 import React from 'react';
 import { useState } from 'react';
 import DatePicker from 'react-date-picker';
-// import DatePicker from 'react-date-picker/dist/entry.nostyle'
+// import DatePicker, {getYear, getMonth, range} from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
-function DatePickerComponent() {
-  const [value, onChange] = useState(new Date());
-  // console.log(value)
+function DatePickerComponent({onchange}) {
+  const [datePicker, setDatePicker] = useState(new Date());
+  
+  function handleOnChange(event) {
+    setDatePicker(event)
+    onchange(event)
+  }
+
   return (
-    <div className='date-picker'>
       <DatePicker 
-      onChange={onChange}
-      value={value} 
+      onChange={handleOnChange}
+      value={datePicker} 
       clearIcon={null}
       calendarIcon={null}
       format="dd-MM-yyyy"
+      containerStyle={{width: '100%'}}
       />
-    </div>
   )
+
 }
 
 export default DatePickerComponent

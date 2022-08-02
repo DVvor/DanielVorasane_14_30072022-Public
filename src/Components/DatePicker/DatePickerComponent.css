@@ -13,3 +13,23 @@
 .react-date-picker__button svg {
   display: none;
 }
+
+/*error message descrease height ************/
+/*<Fit />'s child needed to have its height decreased **/
+
+/* .react-date-picker__calendar {
+  height: 280px !important;
+}
+.react-calendar {
+  height: 100% !important;
+}
+
+.react-calendar__navigation {
+  margin-bottom: 0 !important;
+  /* display: inline-block !important; */
+/* } */
+
+.react-calendar__tile--now {
+  background: none !important;
+  color: black !important;
+}

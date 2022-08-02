@@ -1,12 +1,8 @@
 import './Form.css'
 import { useState } from 'react';
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
-import ListDropdown from '../Dropdown/Dropdown';
+import ListDropdown from '../ListDropdown/ListDropdown';
 import { UsaStates } from 'usa-states';
-// import { useNavigate } from "react-router-dom"
-// import DatePicker from "react-date-picker";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-modal';
 
 /**
@@ -15,23 +11,24 @@ import Modal from 'react-modal';
 */
 
 function Form() {
-
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [dateOfBirth, setDateOfBirth] = useState();
-  const [startDate, setStartDate] = useState();
-  const [street, setStreet] = useState();
-  const [city, setCity] = useState();
-  const [stateOfcity, setStateOfcity] = useState();
-  const [zipCode, setZipCode] = useState();
-  const [department, setDepartment] = useState('');
-
-  let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
-  const [error, setError] = useState(false);
-
+  const usStates = new UsaStates();
+  const optionsUsStates = usStates.states.map((state) => state.name);
   const optionsDepartment = [
     'Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'
   ];
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [startDate, setStartDate] = useState();
+  const [street, setStreet] = useState();
+  const [city, setCity] = useState();
+  const [stateOfcity, setStateOfcity] = useState(optionsUsStates[0]);
+  const [zipCode, setZipCode] = useState();
+  const [department, setDepartment] = useState(optionsDepartment[0]);
+  const [error, setError] = useState(false);
+
+  let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
+
 
   const customStyles = {
     content: {
@@ -53,24 +50,11 @@ function Form() {
     },
     };
 
-  let subtitle;
   const [modalIsOpen, setModalIsOpen] = useState(false);
-    
-  // function openModal() {
-  //   setModalIsOpen(true);
-  // }
-  
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-  
+
   function closeModal() {
     setModalIsOpen(false);
   }
-
-  const usStates = new UsaStates();
-  const optionsUsStates = usStates.states.map((state) => state.name);
 
   function handlesubmit(event) {
     event.preventDefault()
@@ -80,24 +64,24 @@ function Form() {
     console.log(`startDate: ${startDate}`)
     console.log(`street: ${street}`)
     console.log(`city: ${city}`)
-    console.log(`stateOfcity: ${stateOfcity}`)
+    console.log(`stateOfcity: ${stateOfcity.value}`)
     console.log(`zipCode: ${zipCode}`)
-    console.log(`department: ${department}`)
+    console.log(`department: ${department.value}`)
     
     if(!validInput.test(firstName) || 
       !validInput.test(lastName)|| 
-      firstName.length === 0 || 
-      lastName.length === 0
+      firstName.length === 0  
+      // lastName.length === 0 ||
       // dateOfBirth.length === 0 ||
       // startDate.length === 0 ||
       // street.length === 0 ||
       // city.length === 0 ||
       // stateOfcity.length === 0 ||
-      // zipCode.length === 0 ||
+      // zipCode.length !== 5 
       // department.length === 0
-    ){
-      setError(true)
-      alert('error ou incomplet')
+      ){
+        setError(true)
+        alert('error ou incomplet')
       } else {
         setError(false)
         setModalIsOpen(true);
@@ -116,11 +100,11 @@ function Form() {
 
         <label name="date-of-birth">Date of Birth</label>
         {/* <input id="date-of-birth" type="text" onChange={(event) => setDateOfBirth(event.target.value)}/> */}
-        <DatePickerComponent onChange={(event) => setDateOfBirth(event.target.value)} />
-
+        <DatePickerComponent onchange={setDateOfBirth}/>
+        
         <label name="start-date">Start Date</label>
         {/* <input id="start-date" type="text" onChange={(event) => setStartDate(event.target.value)}></input> */}
-        <DatePickerComponent />
+        <DatePickerComponent onchange={setStartDate}/>
 
         <div className="address">
           <p className='title-adress'>Address</p>
@@ -133,15 +117,14 @@ function Form() {
 
           <label name="state">State</label>
           {/* <input name="state" id="state" placeholder='à faire menu déroulant' onChange={(event) => setStateOfcity(event.target.value)}></input> */}
-          <ListDropdown options={optionsUsStates}/>
-
+          <ListDropdown options={optionsUsStates} onchange={setStateOfcity}/>
 
           <label name="zip-code">Zip Code</label>
           <input id="zip-code" type="number" onChange={(event) => setZipCode(event.target.value)}></input>
         </div>
 
         <label name="department" className='department-label'>Department</label>
-        <ListDropdown options={optionsDepartment}/>
+        <ListDropdown options={optionsDepartment} onchange={setDepartment}/>
 
         <div className='button-bl'>
           <button className='button-save' onClick={handlesubmit} >Save</button>
@@ -150,10 +133,9 @@ function Form() {
       </form>
       <Modal
       isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
-      contentLabel="Example Modal"
+      contentLabel="Modal"
     >
       <p className='validate'>Registered!</p>
       <div>The new employee is register</div>
