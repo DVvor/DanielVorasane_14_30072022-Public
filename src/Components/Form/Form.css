@@ -78,10 +78,10 @@ input {
 
 
 .button-bl {
-  margin-top: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .button-save {
@@ -103,7 +103,7 @@ input {
   transition: background-color 500ms ease-out ;	
 }
 
-.enabled:hover {
+.button-save:hover {
     letter-spacing: 0.1rem;
     background-color: rgb(147, 173, 24); /* Green light */
     font-weight: 700;
@@ -117,4 +117,5 @@ input {
 .error-message {
   color: red;
   font-size: x-large;
+  margin-bottom: 0;
 }
