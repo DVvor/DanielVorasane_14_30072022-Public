@@ -3,6 +3,7 @@ import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import { useState, useMemo, useCallback, useRef } from 'react';
+import { getItem } from '../../LocalStorage/LocalStorage';
 // import ListDropdown from '../../Components/ListDropdown/ListDropdown'
 
 function Home() {
@@ -41,12 +42,12 @@ function Home() {
     {
       headerName: "First Name",
       field: "FirstName",
-      minWidth: 130,
+      // minWidth: 130,
     },
     {
       headerName: "Last Name",
       field: "LastName",
-      minWidth: 130,
+      // minWidth: 130,
     },
     {
       headerName: "Start Date",
@@ -76,13 +77,13 @@ function Home() {
     {
       headerName: "Zip Code",
       field: "ZipCode",
-      minWidth: 110,
+      // minWidth: 110,
     }
   ])
 
   const defaultColDef = useMemo(() => {
     return {
-      minWidth: 150,
+      // minWidth: 150,
       sortable: true,
       resizable: true,
       unSortIcon: true,
@@ -90,16 +91,16 @@ function Home() {
     };
   }, []);
 
-  const autoSizeColumns = params => {
-    const colIds = params.columnApi
-      .getAllDisplayedColumns()
-      .map(col => col.getColId());
+  // const autoSizeColumns = params => {
+  //   const colIds = params.columnApi
+  //     .getAllDisplayedColumns()
+  //     .map(col => col.getColId());
 
-    params.columnApi.autoSizeColumns(colIds);
-  };
-  const onGridReady = params => {
-    params.api.sizeColumnsToFit();
-  };
+  //   params.columnApi.autoSizeColumns(colIds);
+  // };
+  // const onGridReady = params => {
+  //   params.api.sizeColumnsToFit();
+  // };
 
   const onFilterTextBoxChanged = useCallback(() => {
     gridRef.current.api.setQuickFilter(
@@ -114,37 +115,15 @@ function Home() {
 
   // { field: 'FirstName''LastName''StartDate''Department''DateofBirth''Street''City''State''ZipCode'
   const rowData = [
-    { FirstName: 'Toyota', LastName: 'Celica', State: 35777, DateofBirth: '07/09/2000' },
-    { FirstName: 'Honda', LastName: 'solange', State: 35999, DateofBirth: '08/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'Mercedes', LastName: 'coco', State: 77000, DateofBirth: '10/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-    { FirstName: 'BWX', LastName: 'dimi', State: 44444, DateofBirth: '09/09/2000' },
-
+    { FirstName: 'Albert', LastName: 'Celica', StartDate: '1/19/2018' , Department: 'Sales', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'Arkansas', DateofBirth: '7/28/2000' },
+    { FirstName: 'Franck', LastName: 'Solange', StartDate: '2/19/2018', Department: 'Marketing', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'Alabama', DateofBirth: '8/19/2000' },
+    { FirstName: 'Jose', LastName: 'Dimi', StartDate: '1/19/2018', Department: 'Legal', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'Arizona', DateofBirth: '8/1/2000' },
+    { FirstName: 'Renato', LastName: 'Coco', StartDate: '1/25/2018', Department: 'Marketing', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'California', DateofBirth: '3/11/2000' },
+    { FirstName: 'Benjamin', LastName: 'Dimi', StartDate: '7/1/2018', Department: 'Legal', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'California', DateofBirth: '5/12/2000' }
   ];
+  const listEmployees = JSON.parse(getItem('list'))
 
+  const Listconcat = rowData.concat(listEmployees)
 
   return (
     <div className='grid-page'>
@@ -172,10 +151,10 @@ function Home() {
       </div>
       <div className="ag-theme-alpine-dark" style={{width: '100%', margin:0}}>
             <AgGridReact
-                rowData={rowData}
+                rowData={Listconcat}
                 columnDefs={columnDefs}
-                onFirstDataRendered={autoSizeColumns}
-                onGridReady={onGridReady}
+                // onFirstDataRendered={autoSizeColumns}
+                // onGridReady={onGridReady}
                 pagination={true}
                 defaultColDef={defaultColDef}
                 ref={gridRef}

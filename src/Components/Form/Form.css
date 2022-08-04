@@ -103,11 +103,15 @@ input {
   transition: background-color 500ms ease-out ;	
 }
 
-.button-save:hover {
+.enabled:hover {
     letter-spacing: 0.1rem;
     background-color: rgb(147, 173, 24); /* Green light */
     font-weight: 700;
     color: white;
+}
+
+.disabled {
+  background-color: grey;
 }
 
 .validate {

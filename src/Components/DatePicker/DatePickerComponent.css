@@ -17,7 +17,7 @@
 /*error message descrease height ************/
 /*<Fit />'s child needed to have its height decreased **/
 
-/* .react-date-picker__calendar {
+.react-date-picker__calendar {
   height: 280px !important;
 }
 .react-calendar {
@@ -27,7 +27,7 @@
 .react-calendar__navigation {
   margin-bottom: 0 !important;
   /* display: inline-block !important; */
-/* } */
+}
 
 .react-calendar__tile--now {
   background: none !important;

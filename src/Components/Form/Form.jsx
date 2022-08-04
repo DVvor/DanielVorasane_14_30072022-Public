@@ -4,6 +4,8 @@ import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent
 import ListDropdown from '../ListDropdown/ListDropdown';
 import { UsaStates } from 'usa-states';
 import Modal from 'react-modal';
+import { addItem, formIsOpen } from '../../LocalStorage/LocalStorage';
+import { useNavigate } from "react-router-dom"
 
 /**
  * Create a layout with principal component
@@ -16,19 +18,37 @@ function Form() {
   const optionsDepartment = [
     'Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'
   ];
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  
+  // We define a default value for department and state of city
+  const stateOfcityOptDefault = {value: optionsUsStates[0], label: optionsUsStates[0]}
+  const departmentOptDefault = {value: optionsDepartment[0], label: optionsDepartment[0]}
+  
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
-  const [startDate, setStartDate] = useState();
-  const [street, setStreet] = useState();
-  const [city, setCity] = useState();
-  const [stateOfcity, setStateOfcity] = useState(optionsUsStates[0]);
-  const [zipCode, setZipCode] = useState();
-  const [department, setDepartment] = useState(optionsDepartment[0]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [stateOfcity, setStateOfcity] = useState(stateOfcityOptDefault);
+  const [zipCode, setZipCode] = useState('');
+  const [department, setDepartment] = useState(departmentOptDefault);
   const [error, setError] = useState(false);
+  const navigate = useNavigate() // permet d'utiliser une fonction de redirection - naviguer entre les pages
+  const [messageValidate, setmessageValidate] = useState(false);
 
   let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
 
+  const dataEmployee = {
+    "FirstName": firstName,
+    "LastName": lastName,
+    "DateofBirth": dateOfBirth.toLocaleDateString("en-US"),
+    "StartDate": startDate.toLocaleDateString("en-US"),
+    "Street": street,
+    "City": city,
+    "State": stateOfcity.value,
+    "ZipCode": zipCode,
+    "Department": department.value,
+  }
 
   const customStyles = {
     content: {
@@ -48,45 +68,51 @@ function Form() {
       alignItems: 'center',
       gap: '10px'
     },
-    };
+  };
+  console.log(`stateOfcity: ${stateOfcity}`)
+  console.log(`department: ${department}`)
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  function closeModal() {
-    setModalIsOpen(false);
-  }
-
-  function handlesubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault()
-    console.log(`firstName: ${firstName}`)
-    console.log(`lastName: ${lastName}`)
-    console.log(`dateOfBirth: ${dateOfBirth}`)
-    console.log(`startDate: ${startDate}`)
-    console.log(`street: ${street}`)
-    console.log(`city: ${city}`)
-    console.log(`stateOfcity: ${stateOfcity.value}`)
-    console.log(`zipCode: ${zipCode}`)
-    console.log(`department: ${department.value}`)
-    
-    if(!validInput.test(firstName) || 
-      !validInput.test(lastName)|| 
-      firstName.length === 0  
-      // lastName.length === 0 ||
+    // console.log(`firstName: ${firstName.length}`)
+    // console.log(`lastName: ${lastName}`)
+    // console.log(`dateOfBirth: ${dateOfBirth}`)
+    // console.log(`startDate: ${startDate}`)
+    // console.log(`street: ${street}`)
+    // console.log(`city: ${city}`)
+    // console.log(`zipCode: ${zipCode}`)
+    console.log(`stateOfcity: ${stateOfcity}`)
+    console.log(`department: ${department}`)
+
+    if(
+      firstName.length <= 2 ||
+      lastName.length <= 2 ||
+      !validInput.test(firstName) ||
+      !validInput.test(lastName) ||
       // dateOfBirth.length === 0 ||
       // startDate.length === 0 ||
-      // street.length === 0 ||
-      // city.length === 0 ||
-      // stateOfcity.length === 0 ||
-      // zipCode.length !== 5 
-      // department.length === 0
+      street.length === 0 ||
+      city.length === 0 ||
+      zipCode.length !== 5 
       ){
-        setError(true)
+        // setError(true)
         alert('error ou incomplet')
       } else {
-        setError(false)
-        setModalIsOpen(true);
+        // setError(false)
+        addItem('list', dataEmployee)
+        openModal()
       }
   }
+  function openModal() {
+    // event.preventDefault()
+    setmessageValidate(true);
+  }
+  function closeModal() {
+    setmessageValidate(false)
+    formIsOpen ('opened', false)
+    navigate(`/home`)  // Lien url home
+  }
+
   Modal.setAppElement('#root');
 
   return (
@@ -113,6 +139,7 @@ function Form() {
           <input id="street" type="text" onChange={(event) => setStreet(event.target.value)}/>
 
           <label name="city">City</label>
+          {/* <input id="city" type="text" onChange={(event) => setCity(event.target.value)}/> */}
           <input id="city" type="text" onChange={(event) => setCity(event.target.value)}/>
 
           <label name="state">State</label>
@@ -127,12 +154,11 @@ function Form() {
         <ListDropdown options={optionsDepartment} onchange={setDepartment}/>
 
         <div className='button-bl'>
-          <button className='button-save' onClick={handlesubmit} >Save</button>
+          <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>
-        
       </form>
       <Modal
-      isOpen={modalIsOpen}
+      isOpen={messageValidate}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Modal"
