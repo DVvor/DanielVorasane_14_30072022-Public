@@ -2,105 +2,29 @@ import './Home.css'
 import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
-import { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { getItem } from '../../LocalStorage/LocalStorage';
-// import ListDropdown from '../../Components/ListDropdown/ListDropdown'
 
 function Home() {
-  // const listLegend = [
-  //   {label: 'First Name', entry: 'firstname'},
-  //   {label: 'Last Name', entry: 'lastname'},
-  //   {label: 'Start Date', entry: 'start'},
-  //   {label: 'Department', entry: 'department'},
-  //   {label: 'Date of Birth', entry: 'dateOfBirth'},
-  //   {label: 'Street', entry: 'street'},
-  //   {label: 'City', entry: 'city'},
-  //   {label: 'State', entry: 'state'},
-  //   {label: 'Zip Code', entry: 'zipcode'},
-  // ]
-
-  // const [rowData] = useState([
-  //   {make: "Toyota", model: "Celica", price: 35000},
-  //   {make: "Ford", model: "Mondeo", price: 32000},
-  //   {make: "Porsche", model: "Boxster", price: 72000}
-  // ]);
   const gridRef = useRef();
-  const [columnDefs, setcolumnDefs] = useState(
-  //   [
-  //   { field: 'FirstName' },
-  //   { field: 'LastName' },
-  //   { field: 'StartDate' },
-  //   { field: 'Department' },
-  //   { field: 'DateofBirth' },
-  //   { field: 'Street' },
-  //   { field: 'City' },
-  //   { field: 'State' },
-  //   { field: 'ZipCode' }
-  // ])
-
-  [
-    {
-      headerName: "First Name",
-      field: "FirstName",
-      // minWidth: 130,
-    },
-    {
-      headerName: "Last Name",
-      field: "LastName",
-      // minWidth: 130,
-    },
-    {
-      headerName: "Start Date",
-      field: "StartDate",
-    },
-    {
-      headerName: "Department",
-      field: "Department",
-    },
-    {
-      headerName: "Date of Birth",
-      field: "DateofBirth",
-    },
-    {
-      headerName: "Street",
-      field: "Street",
-    },
-    {
-      headerName: "City",
-      field: "City",
-    },
-    {
-      headerName: "State",
-      field: "State",
-
-    },
-    {
-      headerName: "Zip Code",
-      field: "ZipCode",
-      // minWidth: 110,
-    }
-  ])
+  const [columnDefs, setcolumnDefs] = useState()
+  
+  const column = [
+    {headerName: "First Name",field: "FirstName"},
+    {headerName: "Last Name", field: "LastName"},
+    {headerName: "Last Name",field: "LastName"},
+    {headerName: "Start Date",field: "StartDate"},
+    {headerName: "Department",field: "Department"},
+    {headerName: "Date of Birth",field: "DateofBirth"},
+    {headerName: "Street",field: "Street"},
+    {headerName: "City",field: "City"},
+    {headerName: "State",field: "State"},
+    {headerName: "Zip Code",field: "ZipCode"}
+  ]
 
   const defaultColDef = useMemo(() => {
-    return {
-      // minWidth: 150,
-      sortable: true,
-      resizable: true,
-      unSortIcon: true,
-      flex: 1,
-    };
+      return {sortable: true, resizable: true, unSortIcon: true, flex: 1}
   }, []);
-
-  // const autoSizeColumns = params => {
-  //   const colIds = params.columnApi
-  //     .getAllDisplayedColumns()
-  //     .map(col => col.getColId());
-
-  //   params.columnApi.autoSizeColumns(colIds);
-  // };
-  // const onGridReady = params => {
-  //   params.api.sizeColumnsToFit();
-  // };
 
   const onFilterTextBoxChanged = useCallback(() => {
     gridRef.current.api.setQuickFilter(
@@ -121,10 +45,16 @@ function Home() {
     { FirstName: 'Renato', LastName: 'Coco', StartDate: '1/25/2018', Department: 'Marketing', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'California', DateofBirth: '3/11/2000' },
     { FirstName: 'Benjamin', LastName: 'Dimi', StartDate: '7/1/2018', Department: 'Legal', Street: '11 Road Cali', City: 'Miami', ZipCode: '77000', State: 'California', DateofBirth: '5/12/2000' }
   ];
+  
   const listEmployees = JSON.parse(getItem('list'))
 
   const Listconcat = rowData.concat(listEmployees)
 
+  useEffect(() => {
+    setcolumnDefs(column)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
   return (
     <div className='grid-page'>
       <div className='header-ag-grid'>

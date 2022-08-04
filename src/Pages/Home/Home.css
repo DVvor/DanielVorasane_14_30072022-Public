@@ -9,7 +9,7 @@
 .header-ag-grid {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   background-color: rgb(24,29,31);
   color: white;
@@ -23,7 +23,7 @@
 .searchbar{
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   background-color: rgb(24,29,31);
 }

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
 import ListDropdown from '../ListDropdown/ListDropdown';
 import { UsaStates } from 'usa-states';
-import Modal from 'react-modal';
-import { addItem, formIsOpen } from '../../LocalStorage/LocalStorage';
-import { useNavigate } from "react-router-dom"
+// import Modal from 'react-modal';
+import { addItem } from '../../LocalStorage/LocalStorage';
+import ModalMessageValidate from '../ModalMessageValidate/ModalMessageValidate';
 
 /**
  * Create a layout with principal component
@@ -34,8 +34,7 @@ function Form() {
   const [department, setDepartment] = useState(departmentOptDefault);
   
   const [error, setError] = useState(false);
-  const navigate = useNavigate() // permet d'utiliser une fonction de redirection - naviguer entre les pages
-  const [messageValidate, setmessageValidate] = useState(false);
+  const [modalisOpen, setmodalisOpen] = useState(false);
 
   let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
 
@@ -51,67 +50,25 @@ function Form() {
     "Department": department.value,
   }
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      borderRadius: '5px',
-      width: '600px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      backgroundColor: 'rgb(24,29,31)',
-      color: 'white',
-      alignItems: 'center',
-      gap: '10px'
-    },
-  };
-
   function handleSubmit(event) {
     event.preventDefault()
-    // console.log(`firstName: ${firstName.length}`)
-    // console.log(`lastName: ${lastName}`)
-    // console.log(`dateOfBirth: ${dateOfBirth}`)
-    // console.log(`startDate: ${startDate}`)
-    // console.log(`street: ${street}`)
-    // console.log(`city: ${city}`)
-    // console.log(`zipCode: ${zipCode}`)
-    console.log(`stateOfcity: ${stateOfcity}`)
-    console.log(`department: ${department}`)
-
     if(
       firstName.length <= 2 ||
       lastName.length <= 2 ||
       !validInput.test(firstName) ||
       !validInput.test(lastName) ||
-      // dateOfBirth.length === 0 ||
-      // startDate.length === 0 ||
       street.length === 0 ||
       city.length === 0 ||
       zipCode.length !== 5 
       ){
         setError(true)
       } else {
+        window.scrollTo(0, 0);
         setError(false)
         addItem('list', dataEmployee)
-        openModal()
+        setmodalisOpen(true)
       }
   }
-  function openModal() {
-    // event.preventDefault()
-    setmessageValidate(true);
-  }
-  function closeModal() {
-    setmessageValidate(false)
-    formIsOpen ('opened', false)
-    navigate(`/home`)  // Lien url home
-  }
-
-  Modal.setAppElement('#root');
 
   return (
     <>
@@ -157,16 +114,17 @@ function Form() {
           <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>
       </form>
-      <Modal
-      isOpen={messageValidate}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Modal"
-    >
+      {/* <Modal
+        isOpen={messageValidate}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Modal"
+      >
       <p className='validate'>Registered!</p>
       <div>The new employee is register</div>
       <button className='btn-validate' onClick={closeModal}>close</button>
-    </Modal>
+      </Modal> */}
+      { modalisOpen ? <ModalMessageValidate /> : "" }
     </>
   )
 }

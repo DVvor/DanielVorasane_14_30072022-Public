@@ -114,14 +114,6 @@ input {
   background-color: grey;
 }
 
-.validate {
-  color: rgb(147, 173, 24);
-  font-size: 70px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  margin-top: 0;
-}
-
 .error-message {
   color: red;
   font-size: x-large;
