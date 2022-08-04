@@ -19,7 +19,7 @@ function Header() {
           <Link to="/home" onClick={backHome}>
             <img alt='logo wealth health' className='logo' src={logo} />
           </Link>
-          <h1 className='title'>WEALTH HEALTH</h1> 
+            <h1 className='title'>WEALTH HEALTH</h1> 
           <button className='btn-create' onClick={handleClick}>Create employee</button>
     </header>
 
