@@ -32,6 +32,7 @@ function Form() {
   const [stateOfcity, setStateOfcity] = useState(stateOfcityOptDefault);
   const [zipCode, setZipCode] = useState('');
   const [department, setDepartment] = useState(departmentOptDefault);
+  
   const [error, setError] = useState(false);
   const navigate = useNavigate() // permet d'utiliser une fonction de redirection - naviguer entre les pages
   const [messageValidate, setmessageValidate] = useState(false);
@@ -69,8 +70,6 @@ function Form() {
       gap: '10px'
     },
   };
-  console.log(`stateOfcity: ${stateOfcity}`)
-  console.log(`department: ${department}`)
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -95,10 +94,9 @@ function Form() {
       city.length === 0 ||
       zipCode.length !== 5 
       ){
-        // setError(true)
-        alert('error ou incomplet')
+        setError(true)
       } else {
-        // setError(false)
+        setError(false)
         addItem('list', dataEmployee)
         openModal()
       }
@@ -147,12 +145,14 @@ function Form() {
           <ListDropdown options={optionsUsStates} onchange={setStateOfcity}/>
 
           <label name="zip-code">Zip Code</label>
-          <input id="zip-code" type="number" onChange={(event) => setZipCode(event.target.value)}></input>
+          <input id="zip-code" type="number" placeholder='99888' onChange={(event) => setZipCode(event.target.value)}></input>
         </div>
 
         <label name="department" className='department-label'>Department</label>
         <ListDropdown options={optionsDepartment} onchange={setDepartment}/>
 
+        {error? 
+        <p className='error-message'>The form is invalid or incomplete. Please correct all required fields.</p> : ""}
         <div className='button-bl'>
           <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>

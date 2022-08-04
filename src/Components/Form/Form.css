@@ -120,5 +120,9 @@ input {
   font-weight: 700;
   margin-bottom: 20px;
   margin-top: 0;
-  
+}
+
+.error-message {
+  color: red;
+  font-size: x-large;
 }
