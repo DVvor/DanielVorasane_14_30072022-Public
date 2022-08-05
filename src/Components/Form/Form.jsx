@@ -6,6 +6,9 @@ import { UsaStates } from 'usa-states';
 // import Modal from 'react-modal';
 import { addItem } from '../../LocalStorage/LocalStorage';
 import ModalMessageValidate from '../ModalMessageValidate/ModalMessageValidate';
+import { useDispatch } from 'react-redux'
+import { addEmployee } from '../../Store/Store';
+// import { getEmployeeData } from '../../Store/Store'
 
 /**
  * Create a layout with principal component
@@ -35,6 +38,7 @@ function Form() {
   
   const [error, setError] = useState(false);
   const [modalisOpen, setmodalisOpen] = useState(false);
+  const dispatch = useDispatch()
 
   let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
 
@@ -67,6 +71,8 @@ function Form() {
         setError(false)
         addItem('list', dataEmployee)
         setmodalisOpen(true)
+        console.log(dataEmployee)
+        dispatch(addEmployee(dataEmployee))
       }
   }
 

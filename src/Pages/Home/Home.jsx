@@ -4,11 +4,12 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { getItem } from '../../LocalStorage/LocalStorage';
+import { useSelector } from 'react-redux';
 
 function Home() {
   const gridRef = useRef();
   const [columnDefs, setcolumnDefs] = useState()
-  
+  const employees = useSelector(state => state.data)
   const column = [
     {headerName: "First Name",field: "FirstName"},
     {headerName: "Last Name", field: "LastName"},
@@ -53,7 +54,7 @@ function Home() {
   useEffect(() => {
     setcolumnDefs(column)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[employees])
   
   return (
     <div className='grid-page'>
@@ -81,7 +82,7 @@ function Home() {
       </div>
       <div className="ag-theme-alpine-dark" style={{width: '100%', margin:0}}>
             <AgGridReact
-                rowData={Listconcat}
+                rowData={employees}
                 columnDefs={columnDefs}
                 // onFirstDataRendered={autoSizeColumns}
                 // onGridReady={onGridReady}
