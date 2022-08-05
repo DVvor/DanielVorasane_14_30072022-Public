@@ -3,12 +3,10 @@ import { useState } from 'react';
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
 import ListDropdown from '../ListDropdown/ListDropdown';
 import { UsaStates } from 'usa-states';
-// import Modal from 'react-modal';
-import { addItem } from '../../LocalStorage/LocalStorage';
 import ModalMessageValidate from '../ModalMessageValidate/ModalMessageValidate';
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../../Store/Store';
-// import { getEmployeeData } from '../../Store/Store'
+// import Modal from 'react-modal';
 
 /**
  * Create a layout with principal component
@@ -37,7 +35,7 @@ function Form() {
   const [department, setDepartment] = useState(departmentOptDefault);
   
   const [error, setError] = useState(false);
-  const [modalisOpen, setmodalisOpen] = useState(false);
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const dispatch = useDispatch()
 
   let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
@@ -69,9 +67,8 @@ function Form() {
       } else {
         window.scrollTo(0, 0);
         setError(false)
-        addItem('list', dataEmployee)
-        setmodalisOpen(true)
-        console.log(dataEmployee)
+        // addItem('list', dataEmployee)
+        setmodalIsOpen(true)
         dispatch(addEmployee(dataEmployee))
       }
   }
@@ -86,11 +83,9 @@ function Form() {
         <input type="text" id="last-name" onChange={(event) => setLastName(event.target.value)} />
 
         <label name="date-of-birth">Date of Birth</label>
-        {/* <input id="date-of-birth" type="text" onChange={(event) => setDateOfBirth(event.target.value)}/> */}
         <DatePickerComponent onchange={setDateOfBirth}/>
         
         <label name="start-date">Start Date</label>
-        {/* <input id="start-date" type="text" onChange={(event) => setStartDate(event.target.value)}></input> */}
         <DatePickerComponent onchange={setStartDate}/>
 
         <div className="address">
@@ -100,11 +95,9 @@ function Form() {
           <input id="street" type="text" onChange={(event) => setStreet(event.target.value)}/>
 
           <label name="city">City</label>
-          {/* <input id="city" type="text" onChange={(event) => setCity(event.target.value)}/> */}
           <input id="city" type="text" onChange={(event) => setCity(event.target.value)}/>
 
           <label name="state">State</label>
-          {/* <input name="state" id="state" placeholder='à faire menu déroulant' onChange={(event) => setStateOfcity(event.target.value)}></input> */}
           <ListDropdown options={optionsUsStates} onchange={setStateOfcity}/>
 
           <label name="zip-code">Zip Code</label>
@@ -115,22 +108,14 @@ function Form() {
         <ListDropdown options={optionsDepartment} onchange={setDepartment}/>
 
         {error? 
-        <p className='error-message'>The form is invalid or incomplete. Please correct all required fields.</p> : ""}
+        <p className='error-message'>The form is invalid or incomplete. Please correct all required fields.</p> 
+        : ""
+        }
         <div className='button-bl'>
           <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>
       </form>
-      {/* <Modal
-        isOpen={messageValidate}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Modal"
-      >
-      <p className='validate'>Registered!</p>
-      <div>The new employee is register</div>
-      <button className='btn-validate' onClick={closeModal}>close</button>
-      </Modal> */}
-      { modalisOpen ? <ModalMessageValidate /> : "" }
+      { modalIsOpen ? <ModalMessageValidate /> : "" }
     </>
   )
 }

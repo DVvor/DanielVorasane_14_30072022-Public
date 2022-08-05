@@ -13,13 +13,11 @@ function ListDropdown ({options , onchange }) {
     setSelectedOption(event)
     onchange(event)
   }
-  
 
   return (
     <>
       <Dropdown options={options} value={defaultOption} onChange={handleOnChange} />
     </>
-
   )
 }
 

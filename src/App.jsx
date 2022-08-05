@@ -3,9 +3,9 @@ import React from 'react'
 
 //Pages
 import Layout from './Components/Layout/Layout';
-import Home from './Pages/Home/Home'
+import Home from './Pages/Home/Home';
 import CreateEmployee from './Pages/CreateEmployee/CreateEmployee';
-
+import ErrorPage from './Pages/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route index element={<Navigate to="/home"></Navigate>} />
           <Route index path='/home' element={<Home />} />
           <Route index path='/create-employee' element={<CreateEmployee />} />
-          {/* <Route path='/*' element={<ErrorPage />} /> */}
+          <Route path='/*' element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

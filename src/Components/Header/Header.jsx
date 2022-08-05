@@ -26,10 +26,7 @@ function Header() {
             <h1 className='title'>WEALTH HEALTH</h1> 
           <button className='btn-create' onClick={handleClick}>Create employee</button>
     </header>
-
   )
-  
 }
-
 
 export default Header

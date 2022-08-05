@@ -22,7 +22,6 @@ function ModalMessageValidate () {
               </div>
             </div>
       </>
-  
     )
   }
 }

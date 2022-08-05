@@ -1,11 +1,10 @@
 import './CreateEmployee.css'
-// import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-// import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
-// import DatePicker from "react-date-picker";
 import { useNavigate } from "react-router-dom"
 import Form from '../../Components/Form/Form';
+// import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
+// import DatePicker from "react-date-picker";
 
 
 /**
@@ -14,7 +13,6 @@ import Form from '../../Components/Form/Form';
 */
 
 function CreateEmployee() {
-
   const navigate = useNavigate()
 
   function closeForm() {
@@ -37,6 +35,6 @@ function CreateEmployee() {
       </div>
     </div>
   )
-  }
+}
 
 export default CreateEmployee

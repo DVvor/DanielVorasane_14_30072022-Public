@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   background-color: rgb(24,29,31);
-  /* padding-bottom: 8%; */
 }
 
 .create-employee-title-bl {
@@ -54,5 +53,4 @@
   width: 33%;
   justify-content: center;
   box-sizing: border-box;
-  
 }
