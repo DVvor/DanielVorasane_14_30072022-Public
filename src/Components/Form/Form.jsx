@@ -3,11 +3,10 @@ import { useState } from 'react';
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
 import ListDropdown from '../ListDropdown/ListDropdown';
 import { UsaStates } from 'usa-states';
-import ModalMessageValidate from '../ModalMessageValidate/ModalMessageValidate';
+import MyModal from '@dvor77/cpmodal';
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../../Store/Store';
-// import Modal from 'react-modal';
-
+import { useNavigate } from 'react-router-dom';
 /**
  * Create a layout with principal component
  * @returns { JSX }
@@ -23,7 +22,7 @@ function Form() {
   // We define a default value for department and state of city
   const stateOfcityOptDefault = {value: optionsUsStates[0], label: optionsUsStates[0]}
   const departmentOptDefault = {value: optionsDepartment[0], label: optionsDepartment[0]}
-  
+  const navigate = useNavigate()
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
@@ -35,8 +34,15 @@ function Form() {
   const [department, setDepartment] = useState(departmentOptDefault);
   
   const [error, setError] = useState(false);
-  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const dispatch = useDispatch()
+  const [opened, setOpened] = useState(false);
+
+  const title = "Registered!" 
+  const subtitle = "the new employee is registered." 
+
+  function closeModal() {
+    setOpened(false)
+  }
 
   let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
 
@@ -68,7 +74,9 @@ function Form() {
         window.scrollTo(0, 0);
         setError(false)
         // addItem('list', dataEmployee)
-        setmodalIsOpen(true)
+        // setmodalIsOpen(true)
+        setOpened(true)
+        // navigate("/home")
         dispatch(addEmployee(dataEmployee))
       }
   }
@@ -115,7 +123,7 @@ function Form() {
           <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>
       </form>
-      { modalIsOpen ? <ModalMessageValidate /> : "" }
+      <MyModal opened={opened} closeModal={closeModal} title={title} subtitle={subtitle}/>
     </>
   )
 }
