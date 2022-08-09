@@ -1,7 +1,15 @@
 import './ListDropdown.css'
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown';
 import { useState } from 'react';
+
+
+/**
+ * Create a component dropdown with react-dropdown
+ * @param { Object } options - List of dropdown options
+ * @param { Function } onchange - Retrieve event's option
+ * @returns { JSX }
+*/
 
 function ListDropdown ({options , onchange }) {
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -9,7 +17,6 @@ function ListDropdown ({options , onchange }) {
   const defaultOption = selectedOption;
 
   function handleOnChange(event) {
-    // event.preventDefault()
     setSelectedOption(event)
     onchange(event)
   }

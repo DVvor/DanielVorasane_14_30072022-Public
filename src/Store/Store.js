@@ -34,6 +34,8 @@ const employeesSlice = createSlice({
 })
 
 // Function to be used in a component(define the type and payload)
+// instead of { type: "employees/addEmployee" , payload: {DATA_EMPLOYEE} }
+
 export const { addEmployee } = employeesSlice.actions
 
 

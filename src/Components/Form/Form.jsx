@@ -1,14 +1,18 @@
 import './Form.css'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UsaStates } from 'usa-states';
+import { useDispatch } from 'react-redux'
+
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
 import ListDropdown from '../ListDropdown/ListDropdown';
-import { UsaStates } from 'usa-states';
 import MyModal from '@dvor77/cpmodal';
-import { useDispatch } from 'react-redux'
+
 import { addEmployee } from '../../Store/Store';
-import { useNavigate } from 'react-router-dom';
+
+
 /**
- * Create a layout with principal component
+ * Create a form component
  * @returns { JSX }
 */
 
@@ -22,7 +26,14 @@ function Form() {
   // We define a default value for department and state of city
   const stateOfcityOptDefault = {value: optionsUsStates[0], label: optionsUsStates[0]}
   const departmentOptDefault = {value: optionsDepartment[0], label: optionsDepartment[0]}
-  const navigate = useNavigate()
+  
+  const title = "Registered!" 
+  const subtitle = "the new employee is registered." 
+  let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
+  
+  const navigate = useNavigate() 
+  const dispatch = useDispatch() // Use to retrieve data of employee and add in the store
+  
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
@@ -34,17 +45,7 @@ function Form() {
   const [department, setDepartment] = useState(departmentOptDefault);
   
   const [error, setError] = useState(false);
-  const dispatch = useDispatch()
   const [opened, setOpened] = useState(false);
-
-  const title = "Registered!" 
-  const subtitle = "the new employee is registered." 
-
-  function closeModal() {
-    setOpened(false)
-  }
-
-  let validInput = /^[a-zA-ZÀ-ÿ ]+$/ // Regex 
 
   const dataEmployee = {
     "FirstName": firstName,
@@ -57,6 +58,12 @@ function Form() {
     "ZipCode": zipCode,
     "Department": department.value,
   }
+
+  // Close modal of validation message
+  function closeModal() {
+    setOpened(false)
+  }
+
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -73,10 +80,8 @@ function Form() {
       } else {
         window.scrollTo(0, 0);
         setError(false)
-        // addItem('list', dataEmployee)
-        // setmodalIsOpen(true)
         setOpened(true)
-        // navigate("/home")
+        navigate("/home")
         dispatch(addEmployee(dataEmployee))
       }
   }

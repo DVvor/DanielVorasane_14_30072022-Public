@@ -5,9 +5,16 @@ import DatePicker from 'react-date-picker';
 // import DatePicker, {getYear, getMonth, range} from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
+/**
+ * Create a component date picker with react-date-picker
+ * @param { Function } onchange - Retrieve event's date
+ * @returns { JSX }
+*/
+
 function DatePickerComponent({onchange}) {
   const [datePicker, setDatePicker] = useState(new Date());
   
+  // to change value of date at every change
   function handleOnChange(event) {
     setDatePicker(event)
     onchange(event)

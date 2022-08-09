@@ -7,7 +7,7 @@ import Form from '../../Components/Form/Form';
 // import DatePicker from "react-date-picker";
 
 /**
- * Create a layout with principal component
+ * Create a page of create employee component
  * @returns { JSX }
 */
 

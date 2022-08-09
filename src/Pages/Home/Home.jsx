@@ -1,17 +1,24 @@
 import './Home.css'
+
 import { AgGridReact } from 'ag-grid-react'; // the AG Grid React Component
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
+
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+/**
+ * Create a homepage with array of employees with ag-grid
+ * @returns { JSX }
+*/
 function Home() {
   const gridRef = useRef();
   const [columnDefs, setcolumnDefs] = useState()
   const employees = useSelector(state => state.data)
+  
+  // We define the headings of the table
   const column = [
     {headerName: "First Name",field: "FirstName"},
-    {headerName: "Last Name", field: "LastName"},
     {headerName: "Last Name",field: "LastName"},
     {headerName: "Start Date",field: "StartDate"},
     {headerName: "Department",field: "Department"},
@@ -22,6 +29,7 @@ function Home() {
     {headerName: "Zip Code",field: "ZipCode"}
   ]
 
+  /** AG-grid style of array *Resizable and Sortable****************************************************** */
   const defaultColDef = useMemo(() => {
       return {sortable: true, resizable: true, unSortIcon: true, flex: 1}
   }, []);
@@ -32,10 +40,12 @@ function Home() {
     );
   }, []);
 
+  // Display the number of employees per page
   const onPageSizeChanged = useCallback(() => {
     var value = document.getElementById('page-size-select').value;
     gridRef.current.api.paginationSetPageSize(Number(value));
   }, []);
+  /********************************************************** */
 
   useEffect(() => {
     setcolumnDefs(column)
@@ -49,9 +59,9 @@ function Home() {
             Show:
             <select onChange={onPageSizeChanged} id="page-size-select">
               <option value="10" defaultValue={true}>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
               <option value="100">100</option>
-              <option value="500">500</option>
-              <option value="1000">1000</option>
             </select>
           </div>
         <div className='searchbar'>
@@ -68,8 +78,6 @@ function Home() {
             <AgGridReact
                 rowData={employees}
                 columnDefs={columnDefs}
-                // onFirstDataRendered={autoSizeColumns}
-                // onGridReady={onGridReady}
                 pagination={true}
                 defaultColDef={defaultColDef}
                 ref={gridRef}
