@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 import DatePickerComponent from '../../Components/DatePicker/DatePickerComponent';
 import ListDropdown from '../ListDropdown/ListDropdown';
-import MyModal from '@dvor77/cpmodal';
+import Mymodal from '@dvor77/cpmodal';
 
 import { addEmployee } from '../../Store/Store';
 
@@ -22,7 +22,7 @@ function Form() {
   const optionsDepartment = [
     'Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'
   ];
-  
+
   // We define a default value for department and state of city
   const stateOfcityOptDefault = {value: optionsUsStates[0], label: optionsUsStates[0]}
   const departmentOptDefault = {value: optionsDepartment[0], label: optionsDepartment[0]}
@@ -62,6 +62,8 @@ function Form() {
   // Close modal of validation message
   function closeModal() {
     setOpened(false)
+    navigate("/home")
+
   }
 
 
@@ -81,7 +83,6 @@ function Form() {
         window.scrollTo(0, 0);
         setError(false)
         setOpened(true)
-        navigate("/home")
         dispatch(addEmployee(dataEmployee))
       }
   }
@@ -128,7 +129,7 @@ function Form() {
           <button className='button-save' onClick={handleSubmit} >Save</button> 
         </div>
       </form>
-      <MyModal opened={opened} closeModal={closeModal} title={title} subtitle={subtitle}/>
+      <Mymodal opened={opened} closeModal={closeModal} title={title} subtitle={subtitle}/>
     </>
   )
 }

@@ -42,7 +42,7 @@ function Home() {
 
   // Display the number of employees per page
   const onPageSizeChanged = useCallback(() => {
-    var value = document.getElementById('page-size-select').value;
+    const value = document.getElementById('page-size-select').value;
     gridRef.current.api.paginationSetPageSize(Number(value));
   }, []);
   /********************************************************** */
